@@ -178,12 +178,12 @@ with st.sidebar:
     st.markdown("Ask questions about your documents.")
     st.divider()
 
-    # API key input
-    groq_key = st.text_input("Groq API Key", type="password",
-                              value=os.environ.get("GROQ_API_KEY", ""),
-                              help="Get free key at console.groq.com")
-    if groq_key:
-        os.environ["GROQ_API_KEY"] = groq_key
+    # # API key input
+    # groq_key = st.text_input("Groq API Key", type="password",
+    #                           value=os.environ.get("GROQ_API_KEY", ""),
+    #                           help="Get free key at console.groq.com")
+    # if groq_key:
+    #     os.environ["GROQ_API_KEY"] = groq_key
 
     st.divider()
 
