@@ -3,15 +3,10 @@
 Build a chatbot that answers questions over your own documents using
 retrieval-augmented generation (RAG).
 
-This version uses OpenAI embeddings, FAISS, and a small custom retrieval
-pipeline to support the currently installed packages.
 
 Install required packages:
-    pip install openai langchain-openai faiss-cpu pypdf numpy
+    pip install langchain_huggingface faiss-cpu pypdf numpy
 
-Usage example:
-    set OPENAI_API_KEY=your_key
-    python "Q&A_App(RAG).py" --data-dir ./docs
 
 The app supports:
 - loading PDF and TXT documents from a folder
