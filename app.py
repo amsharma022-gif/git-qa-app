@@ -163,12 +163,10 @@ def process_uploaded_file(uploaded_file):
     """Save uploaded file to docs/ and clear vector store cache."""
     DOCS_DIR.mkdir(exist_ok=True)
     save_path = DOCS_DIR / uploaded_file.name
-    save_path.write_bytes(uploaded_file.read())
-    # Clear cached index so it rebuilds with new file
+    save_path.write_bytes(uploaded_file.getbuffer())
     if PERSIST_DIR.exists():
         import shutil
         shutil.rmtree(PERSIST_DIR)
-    st.cache_data.clear()
     return save_path
 
 
@@ -235,6 +233,14 @@ embeddings = get_embeddings()
 
 DOCS_DIR.mkdir(exist_ok=True)
 documents = load_documents(DOCS_DIR)
+
+# Re-save any files still in the uploader
+if uploaded_files:
+    for uf in uploaded_files:
+        save_path = DOCS_DIR / uf.name
+        if not save_path.exists():
+            save_path.write_bytes(uf.getbuffer())
+    documents = load_documents(DOCS_DIR)  # reload after re-saving
 
 if not documents:
     st.warning("No documents found. Upload files using the sidebar.")
